@@ -6,12 +6,12 @@ import java.util.Scanner;
 
 public class JogoDaForca {
 
-	// Criação das variáveis
+	// Criaï¿½ï¿½o das variï¿½veis
 
 	private String[] palavras; // um array com as n palavras (lidas do arquivo)
 	private String[] dicas; // um array com as n dicas (lidas do arquivo)
 	private int n; // quantidade de palavras do arquivo (lido do arquivo)
-	private int sorteio = -1; // índice da palavra sorteadado jogo
+	private int sorteio = -1; // ï¿½ndice da palavra sorteadado jogo
 	private int acertos; // total de acertos do jogo
 	private int erros; // total de erros do jogo
 
@@ -42,7 +42,7 @@ public class JogoDaForca {
 		}
 	}
 
-	// Métodos
+	// Mï¿½todos
 
 	public void inicializar() {
 		this.sorteio = (int) (Math.random() * this.n);
@@ -77,7 +77,7 @@ public class JogoDaForca {
 	}
 
 	public boolean advinhar(String palavra) {
-		if (this.palavras[this.sorteio].equals(palavra)) {
+		if (this.palavras[this.sorteio].equalsIgnoreCase(palavra)) {
 			this.acertos = this.getTamanho();
 			return true;
 		} else {

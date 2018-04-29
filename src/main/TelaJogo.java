@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -18,6 +19,9 @@ import javax.swing.border.MatteBorder;
 public class TelaJogo {
 
 	private JFrame frame;
+	private JogoDaForca forca = new JogoDaForca("palavras.txt");
+	private JLabel lblInformacoesErros = new JLabel("6");
+	private ArrayList<JLabel> labelLetras = new ArrayList<>();
 
 	/**
 	 * Launch the application.
@@ -25,7 +29,7 @@ public class TelaJogo {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
+				try {	
 					TelaJogo window = new TelaJogo();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -41,14 +45,45 @@ public class TelaJogo {
 	public TelaJogo() {
 		initialize();
 	}
-
+	
+	private void Restart (boolean result) {
+		String resultado = "You Lose!";
+		
+		if (result) {
+			resultado = "You win!";
+		}
+		
+		JOptionPane.showMessageDialog(null, resultado);		
+		TelaJogo window = new TelaJogo();
+		window.frame.setVisible(true);
+	}
+	
+	//metodos da tela
+	private void ajusteLetraAcerto (String letra) {
+		int[] indices = forca.jogar(letra);
+		if (indices != null) {
+			for (int i=0; i < indices.length; i++) {  
+				labelLetras.get(indices[i]).setText(letra);
+				if (forca.getAcertos()==forca.getTamanho()) {
+					Restart(true);
+				}
+			}
+		}else {
+			lblInformacoesErros.setText(Integer.toString(Integer.parseInt(lblInformacoesErros.getText())-1));
+			if (forca.getErros()==6) {
+				JOptionPane.showMessageDialog(null, "You Lose!");
+				Restart(false);
+			}
+		}
+	}
+	
+	
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		JogoDaForca forca = new JogoDaForca("teste.txt");
 		forca.inicializar();
-		System.out.println(forca.getDica());
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 752, 704);
@@ -70,10 +105,15 @@ public class TelaJogo {
 		frame.getContentPane().add(panelTitulo);
 		panelTitulo.setLayout(null);
 		
-		JLabel lblInformacoes = new JLabel("Tentativas Restantes: 06");
+		JLabel lblInformacoes = new JLabel("Tentativas Restantes: ");
 		lblInformacoes.setBounds(111, 119, 260, 30);
 		panelTitulo.add(lblInformacoes);
 		lblInformacoes.setFont(new Font("Bodoni MT", Font.PLAIN, 24));
+		
+		
+		lblInformacoesErros.setBounds(90, 119, 260, 30);
+		panelTitulo.add(lblInformacoesErros);
+		lblInformacoesErros.setFont(new Font("Bodoni MT", Font.PLAIN, 24));
 		
 		JLabel lblJogoDaForca = new JLabel("Jogo da Forca");
 		lblJogoDaForca.setFont(new Font("Bodoni MT", Font.PLAIN, 44));
@@ -85,10 +125,17 @@ public class TelaJogo {
 		frame.getContentPane().add(panelOpcoes);
 		panelOpcoes.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Arriscar");
-		btnNewButton.setFont(new Font("Bodoni MT", Font.PLAIN, 36));
-		btnNewButton.setBounds(10, 140, 361, 45);
-		panelOpcoes.add(btnNewButton);
+		JButton btnArriscar = new JButton("Arriscar");
+		btnArriscar.setFont(new Font("Bodoni MT", Font.PLAIN, 36));
+		btnArriscar.setBounds(10, 140, 361, 45);
+		panelOpcoes.add(btnArriscar);
+		btnArriscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String respostaChute = JOptionPane.showInputDialog(null, "Favor digite a palavra correta: ");
+				Restart(forca.advinhar(respostaChute));
+			}
+		});
+		
 		
 		JLabel lblDigiteUmaLetra = new JLabel("Digite uma letra:");
 		lblDigiteUmaLetra.setFont(new Font("Bodoni MT", Font.PLAIN, 24));
@@ -102,10 +149,16 @@ public class TelaJogo {
 		panelOpcoes.add(textField);
 		textField.setColumns(10);
 		
-		JButton btnNewButton_1 = new JButton("Enviar");
-		btnNewButton_1.setFont(new Font("Bodoni MT", Font.PLAIN, 22));
-		btnNewButton_1.setBounds(233, 16, 138, 30);
-		panelOpcoes.add(btnNewButton_1);
+		JButton btnEnviar = new JButton("Enviar");
+		btnEnviar.setFont(new Font("Bodoni MT", Font.PLAIN, 22));
+		btnEnviar.setBounds(233, 16, 138, 30);
+		panelOpcoes.add(btnEnviar);
+		btnEnviar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ajusteLetraAcerto(textField.getText().toUpperCase());
+				textField.setText("");
+			}
+		});
 		
 		JPanel panelResposta = new JPanel();
 		panelResposta.setBounds(10, 474, 714, 82);
@@ -117,7 +170,6 @@ public class TelaJogo {
 		lblDica.setBounds(100, 410, 539, 30);
 		frame.getContentPane().add(lblDica);
 		
-		ArrayList<JLabel> labelLetras = new ArrayList<>();
 		for (int i = 0; i < forca.getTamanho(); i++) {			
 			//Auxiliares
 			double tamanhoTotalLabels = (50*forca.getTamanho()) + (10*forca.getTamanho());
@@ -140,16 +192,9 @@ public class TelaJogo {
 			botoes.add(botao);
 			botao.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					int[] indices = forca.jogar(botao.getText());
-					if (indices != null)
-						for (int i=0; i < indices.length; i++) {  
-							labelLetras.get(indices[i]).setText(botao.getText());
-						}
-					else
-						lblInformacoes.setText(Integer.toString(Integer.parseInt(lblInformacoes.getText())-1));
+					ajusteLetraAcerto(botao.getText());	
 				}
 			});
-		}
+		}		
 	}
-
 }
