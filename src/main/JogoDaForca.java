@@ -10,6 +10,7 @@ public class JogoDaForca {
 
 	private String[] palavras; // um array com as n palavras (lidas do arquivo)
 	private String[] dicas; // um array com as n dicas (lidas do arquivo)
+	private String palavraSorteio;
 	private int n; // quantidade de palavras do arquivo (lido do arquivo)
 	private int sorteio = -1; // �ndice da palavra sorteadado jogo
 	private int acertos; // total de acertos do jogo
@@ -46,6 +47,7 @@ public class JogoDaForca {
 
 	public void inicializar() {
 		this.sorteio = (int) (Math.random() * this.n);
+		this.palavraSorteio = this.palavras[this.sorteio];
 		this.acertos = this.erros = 0;
 	}
 
@@ -77,7 +79,7 @@ public class JogoDaForca {
 	}
 
 	public boolean advinhar(String palavra) {
-		if (this.palavras[this.sorteio].equalsIgnoreCase(palavra)) {
+		if (this.palavraSorteio.equalsIgnoreCase(palavra)) {
 			this.acertos = this.getTamanho();
 			return true;
 		} else {
