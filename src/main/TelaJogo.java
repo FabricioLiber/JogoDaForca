@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -22,6 +24,9 @@ public class TelaJogo {
 	private JogoDaForca forca = new JogoDaForca("palavras.txt");
 	private JLabel lblInformacoesErros = new JLabel("6");
 	private ArrayList<JLabel> labelLetras = new ArrayList<>();
+	private ArrayList<JButton> botoes =  new ArrayList<JButton>();
+	JTextField textField = new JTextField();
+	JButton btnEnviar = new JButton("Enviar");
 
 	/**
 	 * Launch the application.
@@ -59,13 +64,18 @@ public class TelaJogo {
 	}
 	
 	//metodos da tela
-	private void ajusteLetraAcerto (String letra) {
+	private void ajusteLetraAcerto (String letra, ArrayList<JButton> botoes) {
 		int[] indices = forca.jogar(letra);
 		if (indices != null) {
 			for (int i=0; i < indices.length; i++) {  
 				labelLetras.get(indices[i]).setText(letra);
 				if (forca.getAcertos()==forca.getTamanho()) {
 					Restart(true);
+				}
+			}
+			for (int i = 0; i < botoes.size(); i++) {
+				if (botoes.get(i).getText().equalsIgnoreCase(letra)){
+					botoes.get(i).setEnabled(false);
 				}
 			}
 		}else {
@@ -75,6 +85,12 @@ public class TelaJogo {
 				Restart(false);
 			}
 		}
+	}
+	
+	private void enviaResposta () {
+		ajusteLetraAcerto(textField.getText().toUpperCase(), botoes);
+		textField.setText("");
+		textField.requestFocus();
 	}
 	
 	
@@ -142,21 +158,27 @@ public class TelaJogo {
 		lblDigiteUmaLetra.setBounds(10, 16, 186, 30);
 		panelOpcoes.add(lblDigiteUmaLetra);
 		
-		JTextField textField = new JTextField();
+		
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					enviaResposta();
+				}
+			}
+		});
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setFont(new Font("Bodoni MT", Font.PLAIN, 26));
 		textField.setBounds(191, 12, 32, 38);
 		panelOpcoes.add(textField);
 		textField.setColumns(10);
 		
-		JButton btnEnviar = new JButton("Enviar");
 		btnEnviar.setFont(new Font("Bodoni MT", Font.PLAIN, 22));
 		btnEnviar.setBounds(233, 16, 138, 30);
 		panelOpcoes.add(btnEnviar);
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ajusteLetraAcerto(textField.getText().toUpperCase());
-				textField.setText("");
+				enviaResposta();
 			}
 		});
 		
@@ -184,7 +206,6 @@ public class TelaJogo {
 			labelLetras.add(labelLetra);
 		}
 		
-		ArrayList<JButton> botoes =  new ArrayList<JButton>();
 		for (int i = 0; i < 26; i++) {
 			JButton botao = new JButton(String.format("%c", 'A' + i));
 			botao.setBounds(0, 30*i, 50, 50);
@@ -192,7 +213,7 @@ public class TelaJogo {
 			botoes.add(botao);
 			botao.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					ajusteLetraAcerto(botao.getText());	
+					ajusteLetraAcerto(botao.getText(), botoes);	
 				}
 			});
 		}		
