@@ -58,7 +58,8 @@ public class TelaJogo {
 			resultado = "You win!";
 		}
 		
-		JOptionPane.showMessageDialog(null, resultado);		
+		JOptionPane.showMessageDialog(frame, resultado);
+		frame.dispose();
 		TelaJogo window = new TelaJogo();
 		window.frame.setVisible(true);
 	}
@@ -81,19 +82,21 @@ public class TelaJogo {
 		}else {
 			lblInformacoesErros.setText(Integer.toString(Integer.parseInt(lblInformacoesErros.getText())-1));
 			if (forca.getErros()==6) {
-				JOptionPane.showMessageDialog(null, "You Lose!");
 				Restart(false);
 			}
 		}
 	}
 	
 	private void enviaResposta () {
-		ajusteLetraAcerto(textField.getText().toUpperCase(), botoes);
-		textField.setText("");
-		textField.requestFocus();
+		if (textField.getText().length()!=1) {
+			JOptionPane.showMessageDialog(frame, "Favor informar apenas uma letra!", "Me ajude", 0);
+			textField.setText("");
+		}else {
+			ajusteLetraAcerto(textField.getText().toUpperCase(), botoes);
+			textField.setText("");
+			textField.requestFocus();	
+		}
 	}
-	
-	
 	
 	/**
 	 * Initialize the contents of the frame.
@@ -147,7 +150,7 @@ public class TelaJogo {
 		panelOpcoes.add(btnArriscar);
 		btnArriscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String respostaChute = JOptionPane.showInputDialog(null, "Favor digite a palavra correta: ");
+				String respostaChute = JOptionPane.showInputDialog(frame, "Favor digite a palavra correta: ");
 				Restart(forca.advinhar(respostaChute));
 			}
 		});
