@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class JogoDaForca {
 
-	// Cria��o das vari�veis
+	// Criacao das variaveis
 
 	private String[] palavras; // um array com as n palavras (lidas do arquivo)
 	private String[] dicas; // um array com as n dicas (lidas do arquivo)
@@ -56,7 +56,7 @@ public class JogoDaForca {
 		int i, j;
 		boolean flag = false;
 		for (i = 0, j = 0; i < this.getTamanho(); i++) {
-			if (letra.equals(this.palavras[this.sorteio].substring(i, i + 1))) {
+			if (letra.equalsIgnoreCase(this.palavras[this.sorteio].substring(i, i + 1))) {
 				flag = true;
 				this.acertos++;
 				j++;
@@ -64,7 +64,7 @@ public class JogoDaForca {
 		}
 		indicesLetrasEncontradas = new int[j];
 		for (i = 0, j = 0; i < this.getTamanho(); i++) {
-			if (letra.equals(this.palavras[this.sorteio].substring(i, i + 1))) {
+			if (letra.equalsIgnoreCase(this.palavras[this.sorteio].substring(i, i + 1))) {
 				indicesLetrasEncontradas[j] = i;
 				j++;
 			}
