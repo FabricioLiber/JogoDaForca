@@ -12,7 +12,7 @@ public class JogoDaForca {
 	private String[] dicas; // um array com as n dicas (lidas do arquivo)
 	private String palavraSorteio;
 	private int n; // quantidade de palavras do arquivo (lido do arquivo)
-	private int sorteio = -1; // �ndice da palavra sorteadado jogo
+	private int sorteio = -1; // indice da palavra sorteadado jogo
 	private int acertos; // total de acertos do jogo
 	private int erros; // total de erros do jogo
 
@@ -26,6 +26,7 @@ public class JogoDaForca {
 
 			arq = new Scanner(new File(nomearquivo));
 			linha = arq.nextLine();
+			System.out.println(linha);
 			this.n = Integer.parseInt(linha);
 			this.palavras = new String[this.n];
 			this.dicas = new String[this.n];
@@ -43,7 +44,7 @@ public class JogoDaForca {
 		}
 	}
 
-	// M�todos
+	// Metodos
 
 	public void inicializar() {
 		this.sorteio = (int) (Math.random() * this.n);

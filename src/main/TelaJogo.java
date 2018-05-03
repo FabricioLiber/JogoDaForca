@@ -30,6 +30,7 @@ public class TelaJogo {
 	JTextField textField = new JTextField();
 	JButton btnEnviar = new JButton("Enviar");
 	JTextArea textAreaErrosAcertos;
+	JLabel labelImagem = new JLabel("");
 
 	/**
 	 * Launch the application.
@@ -79,11 +80,10 @@ public class TelaJogo {
 		frame.getContentPane().add(panelForca);
 		panelForca.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBorder(new MatteBorder(0, 5, 0, 5, (Color) new Color(0, 0, 0)));
-		lblNewLabel.setIcon(new ImageIcon("D:\\Downloads\\enforcamento.jpg"));
-		lblNewLabel.setBounds(0, 0, 369, 389);
-		panelForca.add(lblNewLabel);
+		labelImagem.setBorder(new MatteBorder(0, 5, 0, 5, (Color) new Color(0, 0, 0)));
+		labelImagem.setIcon(new ImageIcon(TelaJogo.class.getResource("/img/0.png")));
+		labelImagem.setBounds(0, 0, 369, 389);
+		panelForca.add(labelImagem);
 		
 		JPanel panelTitulo = new JPanel();
 		panelTitulo.setForeground(Color.WHITE);
@@ -104,10 +104,10 @@ public class TelaJogo {
 		panelTitulo.add(lblInformacoesErros);
 		lblInformacoesErros.setFont(new Font("Bodoni MT", Font.PLAIN, 24));
 		
-		JLabel lblJogoDaForca = new JLabel("Jogo da Forca");
+		JLabel lblJogoDaForca = new JLabel("Jogo da Forca - Salve o Tira Dentes");
 		lblJogoDaForca.setForeground(Color.WHITE);
 		lblJogoDaForca.setFont(new Font("Bodoni MT", Font.PLAIN, 36));
-		lblJogoDaForca.setBounds(10, 0, 278, 63);
+		lblJogoDaForca.setBounds(10, 0, 547, 63);
 		panelTitulo.add(lblJogoDaForca);
 		
 		JPanel panelOpcoes = new JPanel();
@@ -159,7 +159,7 @@ public class TelaJogo {
 		lblDica.setEditable(false);
 		lblDica.setLineWrap(true);
 		lblDica.setBackground(Color.WHITE);
-		lblDica.setFont(new Font("Bodoni MT", Font.PLAIN, 24));
+		lblDica.setFont(new Font("Bodoni MT", Font.PLAIN, 22));
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(0, 0, 0)));
@@ -267,6 +267,7 @@ public class TelaJogo {
 			
 		}else {
 			lblInformacoesErros.setText(Integer.toString(Integer.parseInt(lblInformacoesErros.getText())-1));
+			labelImagem.setIcon(new ImageIcon(TelaJogo.class.getResource("/img/"+forca.getErros()+".png")));
 			botoes.get(indiceBotao).setBackground(Color.RED);
 			if (forca.getErros()==6) {
 				restart(false);
