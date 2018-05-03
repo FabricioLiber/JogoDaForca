@@ -1,5 +1,0 @@
-﻿4
-TESTE;todo programador deve fazer antes de liberar um programador
-TELEVISAO;aparelho utilizado para ver programas e notícias com imagens
-CROSSFIT;esporte de alta intensidade que esta crescendo o número de praticantes
-MONITOR;trouxa que ajuda aos professores durante um periodo de aulas na universidade

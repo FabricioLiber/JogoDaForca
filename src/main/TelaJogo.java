@@ -23,7 +23,7 @@ import javax.swing.border.MatteBorder;
 public class TelaJogo {
 
 	private JFrame frame;
-	private JogoDaForca forca = new JogoDaForca("palavras.txt");
+	private JogoDaForca forca = new JogoDaForca("teste.txt");
 	private JLabel lblInformacoesErros = new JLabel("6");
 	private ArrayList<JLabel> labelLetras = new ArrayList<>();
 	private ArrayList<JButton> botoes =  new ArrayList<JButton>();
