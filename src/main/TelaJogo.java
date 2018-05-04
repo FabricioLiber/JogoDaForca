@@ -23,7 +23,7 @@ import javax.swing.border.MatteBorder;
 public class TelaJogo {
 
 	private JFrame frame;
-	private JogoDaForca forca = new JogoDaForca("teste.txt");
+	private JogoDaForca forca = new JogoDaForca("src/palavras/Cep.txt");
 	private JLabel lblInformacoesErros = new JLabel("6");
 	private ArrayList<JLabel> labelLetras = new ArrayList<>();
 	private ArrayList<JButton> botoes =  new ArrayList<JButton>();
@@ -94,19 +94,19 @@ public class TelaJogo {
 		
 		JLabel lblInformacoes = new JLabel("Tentativas Restantes: ");
 		lblInformacoes.setForeground(Color.WHITE);
-		lblInformacoes.setBounds(583, 0, 228, 30);
+		lblInformacoes.setBounds(580, 0, 208, 30);
 		panelTitulo.add(lblInformacoes);
-		lblInformacoes.setFont(new Font("Bodoni MT", Font.PLAIN, 24));
+		lblInformacoes.setFont(new Font("Bodoni MT", Font.PLAIN, 20));
 		lblInformacoesErros.setForeground(Color.WHITE);
 		
 		
-		lblInformacoesErros.setBounds(811, 0, 22, 30);
+		lblInformacoesErros.setBounds(798, 0, 22, 30);
 		panelTitulo.add(lblInformacoesErros);
-		lblInformacoesErros.setFont(new Font("Bodoni MT", Font.PLAIN, 24));
+		lblInformacoesErros.setFont(new Font("Bodoni MT", Font.PLAIN, 20));
 		
 		JLabel lblJogoDaForca = new JLabel("Jogo da Forca - Salve o Tira Dentes");
 		lblJogoDaForca.setForeground(Color.WHITE);
-		lblJogoDaForca.setFont(new Font("Bodoni MT", Font.PLAIN, 36));
+		lblJogoDaForca.setFont(new Font("Bodoni MT", Font.PLAIN, 32));
 		lblJogoDaForca.setBounds(10, 0, 547, 63);
 		panelTitulo.add(lblJogoDaForca);
 		
@@ -123,7 +123,7 @@ public class TelaJogo {
 		panelOpcoes.add(btnArriscar);
 		
 		JLabel lblDigiteUmaLetra = new JLabel("Digite uma letra:");
-		lblDigiteUmaLetra.setFont(new Font("Bodoni MT", Font.PLAIN, 24));
+		lblDigiteUmaLetra.setFont(new Font("Bodoni MT", Font.PLAIN, 20));
 		lblDigiteUmaLetra.setBounds(42, 46, 186, 30);
 		panelOpcoes.add(lblDigiteUmaLetra);
 		
@@ -138,7 +138,7 @@ public class TelaJogo {
 		});
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setFont(new Font("Bodoni MT", Font.PLAIN, 26));
-		textField.setBounds(223, 42, 32, 38);
+		textField.setBounds(212, 41, 32, 38);
 		panelOpcoes.add(textField);
 		textField.setColumns(10);
 		
@@ -173,9 +173,9 @@ public class TelaJogo {
 		btnReiniciar.setBounds(10, 38, 141, 49);
 		panel.add(btnReiniciar);
 		
-		textAreaErrosAcertos = new JTextArea("Nº de acertos: "+forca.getAcertos()+"\n"+ "Nº de erros: " + forca.getErros());
+		textAreaErrosAcertos = new JTextArea("Num de acertos: "+forca.getAcertos()+"\n"+ "Num de erros: " + forca.getErros());
 		textAreaErrosAcertos.setLineWrap(true);
-		textAreaErrosAcertos.setFont(new Font("Bodoni MT", Font.PLAIN, 24));
+		textAreaErrosAcertos.setFont(new Font("Bodoni MT", Font.PLAIN, 20));
 		textAreaErrosAcertos.setEditable(false);
 		textAreaErrosAcertos.setBackground(Color.WHITE);
 		textAreaErrosAcertos.setBounds(192, 25, 168, 62);
@@ -273,7 +273,7 @@ public class TelaJogo {
 				restart(false);
 			}
 		}
-		textAreaErrosAcertos.setText("Nº de acertos: "+forca.getAcertos()+"\n"+ "Nº de erros: " + forca.getErros());
+		textAreaErrosAcertos.setText("Num de acertos: "+forca.getAcertos()+"\n"+ "Num de erros: " + forca.getErros());
 	}
 	
 	public void enviaResposta () {
