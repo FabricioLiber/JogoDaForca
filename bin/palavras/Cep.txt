@@ -1,0 +1,11 @@
+10
+NORUEGA;Tem o maior índice de desenvolvimento humano do mundo
+CHINA;Tem a maior população do mundo
+MEXICO;É conhecido por ter comidas apimentadas
+KIRIBATI;País com mais fumantes no mundo
+AUSTRALIA;É conhecido por ter os maiores insetos do mundo
+PERNAMBUCO;É o Estado mais antigo do Brasil
+DAMASCO;É a capital da Siría
+COPENHAGUE;É a Capital da Dinamarca
+DUBLIN;É a Capital da Irlanda
+ITALIA;É conhecido por ter formato de uma Bota
