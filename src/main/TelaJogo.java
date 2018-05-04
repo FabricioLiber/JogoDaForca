@@ -23,7 +23,7 @@ import javax.swing.border.MatteBorder;
 public class TelaJogo {
 
 	private JFrame frame;
-	private JogoDaForca forca = new JogoDaForca("src/palavras/Cep.txt");
+	private JogoDaForca forca = new JogoDaForca("palavras.txt");
 	private JLabel lblInformacoesErros = new JLabel("6");
 	private ArrayList<JLabel> labelLetras = new ArrayList<>();
 	private ArrayList<JButton> botoes =  new ArrayList<JButton>();
@@ -64,7 +64,7 @@ public class TelaJogo {
 		forca.inicializar();
 		
 		frame = new JFrame();
-		frame.setTitle("Jogo da Forca (POO) - Feito por Fabrício e Rafael");
+		frame.setTitle("Jogo da Forca (POO) - Feito por Fabrï¿½cio e Rafael");
 		frame.setBounds(150, 20, 859, 582);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);

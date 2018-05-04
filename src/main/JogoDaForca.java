@@ -26,7 +26,6 @@ public class JogoDaForca {
 
 			arq = new Scanner(new File(nomearquivo));
 			linha = arq.nextLine();
-			System.out.println(linha);
 			this.n = Integer.parseInt(linha);
 			this.palavras = new String[this.n];
 			this.dicas = new String[this.n];
