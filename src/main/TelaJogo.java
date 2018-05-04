@@ -142,6 +142,7 @@ public class TelaJogo {
 		panelOpcoes.add(textField);
 		textField.setColumns(10);
 		
+		
 		btnEnviar.setFont(new Font("Bodoni MT", Font.PLAIN, 22));
 		btnEnviar.setBounds(265, 46, 138, 30);
 		panelOpcoes.add(btnEnviar);

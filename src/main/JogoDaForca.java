@@ -1,3 +1,5 @@
+// Elaborado por Fabricio Liberato e Rafael Lins - POO - IFPB 2018.1
+
 package main;
 
 import java.io.File;
@@ -47,7 +49,7 @@ public class JogoDaForca {
 
 	public void inicializar() {
 		this.sorteio = (int) (Math.random() * this.n);
-		this.palavraSorteio = this.palavras[this.sorteio];
+		this.palavraSorteio = new String (this.palavras[this.sorteio]);
 		this.acertos = this.erros = 0;
 	}
 
@@ -56,7 +58,7 @@ public class JogoDaForca {
 		int i, j;
 		boolean flag = false;
 		for (i = 0, j = 0; i < this.getTamanho(); i++) {
-			if (letra.equalsIgnoreCase(this.palavras[this.sorteio].substring(i, i + 1))) {
+			if (letra.equalsIgnoreCase(this.palavraSorteio.substring(i, i + 1))) {
 				flag = true;
 				this.acertos++;
 				j++;
@@ -64,13 +66,13 @@ public class JogoDaForca {
 		}
 		indicesLetrasEncontradas = new int[j];
 		for (i = 0, j = 0; i < this.getTamanho(); i++) {
-			if (letra.equalsIgnoreCase(this.palavras[this.sorteio].substring(i, i + 1))) {
+			if (letra.equalsIgnoreCase(this.palavraSorteio.substring(i, i + 1))) {
 				indicesLetrasEncontradas[j] = i;
 				j++;
 			}
 		}
 		if (flag) {
-			this.palavras[this.sorteio] = this.palavras[this.sorteio].replaceAll(letra, "#");
+			this.palavraSorteio = this.palavraSorteio.replaceAll(letra, "#");
 			return indicesLetrasEncontradas;
 		}else {
 			this.erros++;
@@ -79,7 +81,7 @@ public class JogoDaForca {
 	}
 
 	public boolean advinhar(String palavra) {
-		if (this.palavraSorteio.equalsIgnoreCase(palavra)) {
+		if (this.palavras[this.sorteio].equalsIgnoreCase(palavra)) {
 			this.acertos = this.getTamanho();
 			return true;
 		} else {
